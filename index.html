@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mushaf Al-Qubba — Al-Qur'an 30 Juz untuk Belajar Bahasa Arab</title>
+<meta name="description" content="Mushaf Al-Qur'an 30 juz, 604 halaman, dengan warna tajwid, terjemahan per kata, catatan pembaca, dan audio hafalan. Gratis, tanpa iklan, bisa dipasang di layar utama dan dibaca tanpa internet.">
+<meta name="theme-color" content="#14503f">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./ikon/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="./ikon/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Mushaf">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mushaf Al-Qubba — Al-Qur'an 30 Juz">
+<meta property="og:description" content="604 halaman, warna tajwid, terjemahan per kata, catatan pembaca, audio hafalan. Gratis dan bisa dibaca tanpa internet.">
+<meta property="og:image" content="./img/kover-bersih.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Mushaf Al-Qubba","applicationCategory":"EducationalApplication","operatingSystem":"Web, Android, iOS","description":"Mushaf Al-Qur'an 30 juz, 604 halaman, dengan warna tajwid dan terjemahan per kata.","offers":{"@type":"Offer","price":"0","priceCurrency":"IDR"},"inLanguage":"id","author":{"@type":"Organization","name":"Amanah Media"}}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --hijau:#14503f; --hijau-terang:#1f6b53; --hijau-muda:#e6f0eb;
+  --krem:#f3efe6; --krem-tua:#e0d9c9; --tinta:#23201a; --tinta-lembut:#6b6152;
+  --putih:#fff; --radius:16px;
+  --bayang:0 1px 2px rgba(60,45,20,.06), 0 8px 24px rgba(60,45,20,.08);
+}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+body{
+  margin:0; background:var(--krem); color:var(--tinta);
+  font-family:"Segoe UI",Tahoma,Arial,system-ui,sans-serif;
+  font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%; display:block}
+a{color:var(--hijau-terang)}
+.wadah{width:100%; max-width:1080px; margin:0 auto; padding:0 20px}
+.kecil{font-size:13px; color:var(--tinta-lembut)}
+
+/* ---------- Bar atas ---------- */
+.bar{
+  position:sticky; top:0; z-index:50;
+  background:rgba(243,239,230,.88); backdrop-filter:saturate(160%) blur(10px);
+  border-bottom:1px solid var(--krem-tua);
+}
+.bar .wadah{display:flex; align-items:center; gap:12px; min-height:62px; padding-top:env(safe-area-inset-top)}
+.bar .logo{width:36px; height:36px; border-radius:9px; flex:0 0 auto}
+.bar .nama{font-weight:700; letter-spacing:-.01em}
+.bar .nama small{display:block; font-weight:400; font-size:11.5px; color:var(--tinta-lembut); letter-spacing:0}
+.bar nav{margin-left:auto; display:none; gap:22px; font-size:14.5px}
+.bar nav a{color:var(--tinta-lembut); text-decoration:none}
+.bar nav a:hover{color:var(--hijau)}
+.bar .tombol-kecil{
+  margin-left:auto; padding:9px 18px; border-radius:10px; background:var(--hijau);
+  color:#fff; text-decoration:none; font-weight:700; font-size:14px; white-space:nowrap;
+}
+@media(min-width:820px){
+  .bar nav{display:flex}
+  .bar .tombol-kecil{margin-left:24px}
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  background:
+    radial-gradient(900px 420px at 85% -10%, rgba(255,255,255,.16), transparent 60%),
+    linear-gradient(160deg,#12483a 0%, #14503f 45%, #0d3b30 100%);
+  color:#fff; padding:56px 0 64px; overflow:hidden;
+}
+.hero .wadah{display:grid; gap:40px; align-items:center}
+@media(min-width:880px){ .hero .wadah{grid-template-columns:1.05fr .95fr; gap:56px} }
+.lencana{
+  display:inline-flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600;
+  background:rgba(255,255,255,.13); border:1px solid rgba(255,255,255,.22);
+  padding:6px 13px; border-radius:999px; margin-bottom:20px;
+}
+.lencana .titik{width:7px;height:7px;border-radius:50%;background:#7dffc4;box-shadow:0 0 0 3px rgba(125,255,196,.22)}
+.hero h1{
+  margin:0 0 16px; font-size:clamp(30px,6.4vw,52px); line-height:1.12;
+  letter-spacing:-.025em; font-weight:800;
+}
+.hero h1 span{color:#9ff0cd}
+.hero .tagline{
+  margin:0 0 28px; font-size:clamp(15px,2.4vw,18px); line-height:1.65;
+  color:rgba(255,255,255,.87); max-width:34em;
+}
+.aksi{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
+.tombol{
+  display:inline-flex; align-items:center; gap:9px; padding:15px 28px; border-radius:12px;
+  font-weight:700; font-size:16px; text-decoration:none; border:0; cursor:pointer;
+  font-family:inherit; transition:transform .12s ease, box-shadow .12s ease, background .15s ease;
+}
+.tombol:active{transform:translateY(1px)}
+.tombol-utama{background:#fff; color:var(--hijau); box-shadow:0 8px 22px rgba(0,0,0,.22)}
+.tombol-utama:hover{background:#f2fff8}
+.tombol-garis{background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.42)}
+.tombol-garis:hover{background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.7)}
+.tombol svg{width:18px;height:18px;flex:0 0 auto}
+
+.angka{display:flex; flex-wrap:wrap; gap:10px; margin:34px 0 0; padding:0; list-style:none}
+.angka li{
+  flex:1 1 100px; background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.16);
+  border-radius:13px; padding:13px 15px;
+}
+.angka b{display:block; font-size:22px; line-height:1.15; letter-spacing:-.02em}
+.angka span{font-size:12px; color:rgba(255,255,255,.72)}
+
+.hero-art{position:relative; justify-self:center; width:100%; max-width:400px}
+.hero-art img{
+  width:100%; height:auto; border-radius:20px;
+  box-shadow:0 26px 60px rgba(0,0,0,.42), 0 0 0 1px rgba(255,255,255,.14);
+}
+.hero-art::after{
+  content:""; position:absolute; inset:auto -8% -8% -8%; height:45%; z-index:-1;
+  background:radial-gradient(ellipse at center, rgba(125,255,196,.28), transparent 70%);
+  filter:blur(26px);
+}
+
+/* ---------- Bagian umum ---------- */
+.bagian{padding:64px 0}
+.bagian-kepala{max-width:44em; margin:0 auto 40px; text-align:center}
+.bagian-kepala h2{
+  margin:0 0 12px; font-size:clamp(23px,4vw,34px); line-height:1.22;
+  letter-spacing:-.02em; font-weight:800;
+}
+.bagian-kepala p{margin:0; color:var(--tinta-lembut); font-size:15.5px}
+.lebel{
+  display:inline-block; font-size:11.5px; font-weight:800; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--hijau-terang); margin-bottom:12px;
+}
+
+/* ---------- Fitur ---------- */
+.kisi-fitur{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(268px,1fr))}
+.fitur{
+  background:var(--putih); border:1px solid var(--krem-tua); border-radius:var(--radius);
+  padding:24px; box-shadow:var(--bayang); transition:transform .15s ease, box-shadow .15s ease;
+}
+.fitur:hover{transform:translateY(-3px); box-shadow:0 2px 4px rgba(60,45,20,.07),0 14px 34px rgba(60,45,20,.12)}
+.fitur .ikon{
+  width:44px; height:44px; border-radius:12px; display:grid; place-items:center;
+  background:var(--hijau-muda); color:var(--hijau); margin-bottom:15px;
+}
+.fitur .ikon svg{width:22px;height:22px}
+.fitur h3{margin:0 0 7px; font-size:16.5px; font-weight:700; letter-spacing:-.01em}
+.fitur p{margin:0; font-size:14px; line-height:1.6; color:var(--tinta-lembut)}
+
+/* ---------- Mulai / pasang ---------- */
+.mulai{background:#fff; border-top:1px solid var(--krem-tua); border-bottom:1px solid var(--krem-tua)}
+.kisi-mulai{display:grid; gap:28px}
+@media(min-width:840px){ .kisi-mulai{grid-template-columns:1fr 1fr; gap:44px} }
+.langkah{list-style:none; margin:0; padding:0; counter-reset:l}
+.langkah li{
+  position:relative; padding:0 0 22px 48px; counter-increment:l; font-size:14.5px;
+}
+.langkah li::before{
+  content:counter(l); position:absolute; left:0; top:-2px;
+  width:32px; height:32px; border-radius:50%; display:grid; place-items:center;
+  background:var(--hijau); color:#fff; font-weight:800; font-size:14px;
+}
+.langkah li:last-child{padding-bottom:0}
+.langkah b{display:block; font-size:15px; margin-bottom:2px}
+.langkah span{color:var(--tinta-lembut)}
+
+.kartu-pasang{
+  background:linear-gradient(165deg,#12483a,#14503f); color:#fff;
+  border-radius:20px; padding:30px; box-shadow:0 16px 40px rgba(20,80,63,.28);
+}
+.kartu-pasang h3{margin:0 0 10px; font-size:19px; letter-spacing:-.01em}
+.kartu-pasang p{margin:0 0 20px; font-size:14px; color:rgba(255,255,255,.82)}
+.kartu-pasang .tombol-utama{background:#fff; color:var(--hijau); width:100%; justify-content:center}
+.kartu-pasang .catatan-pasang{
+  margin:16px 0 0; font-size:12.5px; color:rgba(255,255,255,.7);
+  border-top:1px solid rgba(255,255,255,.16); padding-top:14px;
+}
+
+/* ---------- Pintasan ---------- */
+.pintasan{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.pintasan a{
+  display:flex; align-items:center; gap:13px; background:#fff; border:1px solid var(--krem-tua);
+  border-radius:14px; padding:16px 18px; text-decoration:none; color:var(--tinta);
+  box-shadow:0 1px 3px rgba(60,45,20,.05); transition:border-color .15s ease, transform .15s ease;
+}
+.pintasan a:hover{border-color:#bcd6c9; transform:translateY(-2px)}
+.pintasan .nomor{
+  width:38px; height:38px; flex:0 0 auto; border-radius:10px; display:grid; place-items:center;
+  background:var(--hijau-muda); color:var(--hijau);
+}
+.pintasan .nomor svg{width:19px;height:19px}
+.pintasan b{display:block; font-size:14.5px}
+.pintasan small{color:var(--tinta-lembut); font-size:12.5px}
+
+/* ---------- Donasi ---------- */
+.donasi{
+  background:linear-gradient(165deg,#14503f,#0d3b30); color:#fff;
+  border-radius:22px; padding:clamp(28px,5vw,48px); text-align:center;
+}
+.donasi h2{margin:0 0 12px; font-size:clamp(21px,3.6vw,30px); letter-spacing:-.02em}
+.donasi p{margin:0 auto 26px; max-width:38em; color:rgba(255,255,255,.85); font-size:15px}
+.donasi .tombol-utama{background:#fff; color:var(--hijau)}
+
+/* ---------- Kaki ---------- */
+.kaki{background:#0d3b30; color:rgba(255,255,255,.72); padding:48px 0 36px; margin-top:64px}
+.kaki .wadah{display:grid; gap:32px}
+@media(min-width:760px){ .kaki .wadah{grid-template-columns:1.4fr 1fr 1fr} }
+.kaki h4{
+  margin:0 0 14px; font-size:12px; letter-spacing:.11em; text-transform:uppercase;
+  color:rgba(255,255,255,.52); font-weight:700;
+}
+.kaki ul{list-style:none; margin:0; padding:0; display:grid; gap:9px; font-size:14px}
+.kaki a{color:rgba(255,255,255,.9); text-decoration:none}
+.kaki a:hover{color:#9ff0cd; text-decoration:underline}
+.kaki .merek{display:flex; align-items:center; gap:13px; margin-bottom:14px}
+.kaki .merek img{width:42px;height:42px;border-radius:10px}
+.kaki .merek b{color:#fff; font-size:16px; display:block}
+.kaki .merek span{font-size:12.5px; color:rgba(255,255,255,.6)}
+.kaki-bawah{
+  border-top:1px solid rgba(255,255,255,.12); margin-top:34px; padding-top:22px;
+  font-size:12.5px; color:rgba(255,255,255,.55); display:flex; flex-wrap:wrap; gap:8px 20px;
+}
+.kaki-bawah span{margin-left:auto}
+
+/* ---------- Bar bawah (mobile) ---------- */
+.bilah{
+  position:fixed; left:0; right:0; bottom:0; z-index:60; display:flex; gap:10px;
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(243,239,230,.94); backdrop-filter:blur(12px);
+  border-top:1px solid var(--krem-tua);
+  transform:translateY(110%); transition:transform .22s ease;
+}
+.bilah.tampil{transform:translateY(0)}
+.bilah .tombol{flex:1 1 auto; justify-content:center; padding:14px 18px; background:var(--hijau); color:#fff; font-size:15px}
+@media(min-width:820px){ .bilah{display:none} }
+
+.lompat{
+  position:absolute; left:-9999px; top:0; background:#fff; color:var(--hijau);
+  padding:12px 18px; border-radius:0 0 10px 0; font-weight:700; z-index:100;
+}
+.lompat:focus{left:0}
+:focus-visible{outline:3px solid #7dffc4; outline-offset:2px; border-radius:6px}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important; transition-duration:.001ms!important; scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+
+<a class="lompat" href="#mulaip">Lompat ke isi utama</a>
+
+<div class="bar">
+  <div class="wadah">
+    <img class="logo" src="./ikon/ikon-192.png" alt="" width="36" height="36">
+    <div class="nama">Mushaf Al-Qubba<small>Al-Qur'an 30 Juz</small></div>
+    <nav aria-label="Navigasi utama">
+      <a href="#fitur">Fitur</a>
+      <a href="#mulaip">Cara Pakai</a>
+      <a href="#pintasan">Halaman</a>
+      <a href="bagikan.html">Bagikan</a><a href="#donasi">Dukungan</a>
+    </nav>
+    <a class="tombol-kecil" href="./daftar-halaman.html">Buka Mushaf</a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="wadah">
+    <div>
+      <div class="lencana"><span class="titik"></span> Gratis · Tanpa iklan · Bisa tanpa internet</div>
+      <h1>Baca Al-Qur'an<br><span>30 juz, 604 halaman</span></h1>
+      <p class="tagline">
+        Mushaf Al-Qubba menampilkan halaman Al-Qur'an persis seperti mushaf cetak,
+        dilengkapi warna tajwid, terjemahan per kata, catatan pembaca, dan audio hafalan —
+        untuk belajar Al-Qur'an sekaligus bahasa Arab.
+      </p>
+      <div class="aksi">
+        <a class="tombol tombol-utama" href="./daftar-halaman.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Buka Mushaf
+        </a>
+        <a class="tombol tombol-garis" href="./surat.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          Daftar Surat
+        </a>
+      </div>
+      <ul class="angka">
+        <li><b>30</b><span>juz lengkap</span></li>
+        <li><b>604</b><span>halaman</span></li>
+        <li><b>114</b><span>surat</span></li>
+      </ul>
+    </div>
+    <div class="hero-art">
+      <img src="./img/kover-bersih.jpg" alt="Sampul Mushaf Al-Qubba" width="1918" height="1918" fetchpriority="high">
+    </div>
+  </div>
+</section>
+
+<section class="bagian" id="fitur">
+  <div class="wadah">
+    <div class="bagian-kepala">
+      <span class="lebel">Fitur</span>
+      <h2>Dirancang untuk membaca dan memahami</h2>
+      <p>Bukan sekadar tampilan mushaf — setiap fitur membantu Anda membaca dengan benar dan mengerti artinya.</p>
+    </div>
+    <div class="kisi-fitur">
+      <article class="fitur">
+        <div class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21.4 8 14 2 9.4h7.6z"/></svg></div>
+        <h3>Warna tajwid</h3>
+        <p>Hukum bacaan ditandai warna sehingga lebih mudah dikenali saat membaca.</p>
+      </article>
+      <article class="fitur">
+        <div class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg></div>
+        <h3>Terjemahan per kata</h3>
+        <p>Ketuk kata untuk melihat artinya — cara praktis memperluas kosakata bahasa Arab.</p>
+      </article>
+      <article class="fitur">
+        <div class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>
+        <h3>Catatan pembaca</h3>
+        <p>Simpan tadabbur, pertanyaan, atau hafalan pribadi pada halaman yang sedang dibaca.</p>
+      </article>
+      <article class="fitur">
+        <div class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+        <h3>Audio hafalan</h3>
+        <p>Murottal Metode Khumus untuk melatih hafalan dan menyimak bacaan yang benar.</p>
+      </article>
+      <article class="fitur">
+        <div class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+        <h3>Kaca pembesar &amp; cubit</h3>
+        <p>Perbesar halaman dengan cubit dua jari atau kaca pembesar mengikuti kursor.</p>
+      </article>
+      <article class="fitur">
+        <div class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v8"/><path d="m5 12 7 7 7-7"/><path d="M5 12H2"/><path d="M22 12h-3"/><path d="M12 22v-5"/></svg></div>
+        <h3>Bisa tanpa internet</h3>
+        <p>Pasang di layar utama seperti aplikasi. Halaman yang sudah dibuka tetap terbaca offline.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="bagian mulai" id="mulaip">
+  <div class="wadah">
+    <div class="bagian-kepala">
+      <span class="lebel">Cara Pakai</span>
+      <h2>Mulai membaca dalam satu menit</h2>
+      <p>Tidak perlu daftar dan tidak perlu memasang apa pun untuk mulai membaca.</p>
+    </div>
+    <div class="kisi-mulai">
+      <ol class="langkah">
+        <li><b>Buka mushaf</b><span>Ketuk “Buka Mushaf”, lalu pilih juz yang ingin dibaca.</span></li>
+        <li><b>Pilih halaman</b><span>Setiap juz menampilkan daftar halaman beserta nomor dan suratnya.</span></li>
+        <li><b>Baca dan telusuri</b><span>Geser ke kiri atau kanan untuk pindah halaman. Ketuk kata untuk artinya.</span></li>
+        <li><b>Simpan catatan</b><span>Tulis tadabbur atau hafalan pada halaman yang sedang dibuka.</span></li>
+        <li><b>Pasang di layar utama</b><span>Agar bisa dibuka seperti aplikasi dan tetap terbaca tanpa jaringan.</span></li>
+      </ol>
+      <div class="kartu-pasang">
+        <h3>Pasang sebagai aplikasi</h3>
+        <p>Ringan, tanpa iklan, dan tidak perlu unduh dari toko aplikasi.</p>
+        <button class="tombol tombol-utama" id="pasang" type="button" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Pasang sekarang
+        </button>
+        <p class="catatan-pasang" id="petunjuk-pasang">
+          <b>Android (Chrome):</b> menu ⋮ → “Tambahkan ke layar utama”.<br>
+          <b>iPhone (Safari):</b> tombol Bagikan → “Tambahkan ke Layar Utama”.<br>
+          <b>Desktop:</b> ikon pasang di kanan address bar.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bagian" id="pintasan">
+  <div class="wadah">
+    <div class="bagian-kepala">
+      <span class="lebel">Pintasan</span>
+      <h2>Langsung ke yang Anda butuhkan</h2>
+    </div>
+    <div class="pintasan">
+      <a href="./daftar-halaman.html">
+        <span class="nomor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+        <span><b>Mushaf per halaman</b><small>30 juz · 604 halaman</small></span>
+      </a>
+      <a href="./surat.html">
+        <span class="nomor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></span>
+        <span><b>Daftar surat</b><small>114 surat, langsung ke halaman</small></span>
+      </a>
+      <a href="./player.html">
+        <span class="nomor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></span>
+        <span><b>Audio hafalan</b><small>Metode Khumus</small></span>
+      </a>
+      <a href="./catatan-publik.html">
+        <span class="nomor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span>
+        <span><b>Catatan pembaca</b><small>Tadabbur dari pembaca lain</small></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="bagian" id="donasi" style="padding-top:0">
+  <div class="wadah">
+    <div class="donasi">
+      <h2>Bantu mushaf ini tetap gratis</h2>
+      <p>
+        Mushaf Al-Qubba dikembangkan dan dirawat secara mandiri. Dukungan Anda membantu
+        biaya server, penambahan fitur, dan penyebaran kepada yang membutuhkan.
+      </p>
+      <a class="tombol tombol-utama" href="https://bit.ly/donasiqubba" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Salurkan dukungan
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="kaki">
+  <div class="wadah">
+    <div>
+      <div class="merek">
+        <img src="./ikon/ikon-192.png" alt="" width="42" height="42">
+        <div><b>Mushaf Al-Qubba</b><span>Al-Qur'an untuk belajar bahasa Arab</span></div>
+      </div>
+      <p class="kecil" style="color:rgba(255,255,255,.62); margin:0; max-width:32em">
+        30 juz · 604 halaman · warna tajwid · terjemahan per kata · catatan pembaca · audio hafalan.
+        Gratis, tanpa iklan, dan bisa dibaca tanpa internet.
+      </p>
+    </div>
+    <div>
+      <h4>Halaman</h4>
+      <ul>
+        <li><a href="./daftar-halaman.html">Buka Mushaf</a></li>
+        <li><a href="./surat.html">Daftar Surat</a></li>
+        <li><a href="./player.html">Audio Hafalan</a></li>
+        <li><a href="./catatan-publik.html">Catatan Pembaca</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Pengembang</h4>
+      <ul>
+        <li><b style="color:#fff; font-weight:600">Amanah Media</b></li>
+        <li><a href="tel:+6281281649295">HP 0812-8164-9295</a></li>
+        <li><a href="https://wa.me/628980614109" target="_blank" rel="noopener noreferrer">WhatsApp 0898-0614-109</a></li>
+        <li><a href="mailto:amanahmedia@gmail.com">amanahmedia@gmail.com</a></li>
+        <li><a href="https://amanahmedia.blogspot.com" target="_blank" rel="noopener noreferrer">amanahmedia.blogspot.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wadah">
+    <div class="kaki-bawah">
+      <span style="margin:0">&copy; 2026 Amanah Media · Mushaf Al-Qubba</span>
+      <span style="margin:0 0 0 auto">Dibuat untuk umat</span>
+    </div>
+  </div>
+</footer>
+
+<div class="bilah" id="bilah">
+  <a class="tombol" href="./daftar-halaman.html">Buka Mushaf</a>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* Daftarkan service worker supaya bisa dipasang & dibaca offline */
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("./sw.js").catch(function () {});
+    });
+  }
+
+  /* Tombol pasang aplikasi (jika didukung browser) */
+  var tombol = document.getElementById("pasang");
+  var petunjuk = document.getElementById("petunjuk-pasang");
+  var promptPasang = null;
+
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault();
+    promptPasang = e;
+    tombol.hidden = false;
+    if (petunjuk) petunjuk.hidden = true;
+  });
+
+  tombol.addEventListener("click", function () {
+    if (!promptPasang) return;
+    promptPasang.prompt();
+    promptPasang.userChoice.then(function () {
+      promptPasang = null;
+      tombol.hidden = true;
+      if (petunjuk) petunjuk.hidden = false;
+    });
+  });
+
+  window.addEventListener("appinstalled", function () {
+    tombol.hidden = true;
+    if (petunjuk) petunjuk.hidden = false;
+  });
+
+  /* Tampilkan bilah ajakan setelah pengguna menggulir */
+  var bilah = document.getElementById("bilah");
+  if (bilah) {
+    var tampil = function () {
+      bilah.classList.toggle("tampil", window.scrollY > 520);
+    };
+    window.addEventListener("scroll", tampil, { passive: true });
+    tampil();
+  }
+})();
+</script>
+<script src="./iklan.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+# Penampil mushaf publik: hanya berkas tampilan yang boleh diakses.
+Options -Indexes
+
+<FilesMatch "\.(sql|zip|log|bak|old|ini|yml|yaml|mjs|md|sh|ps1)$">
+    Require all denied
+</FilesMatch>

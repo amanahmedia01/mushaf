@@ -1,0 +1,10 @@
+# berkas unduhan besar
+unduh/
+*.apk
+*.aab
+*.zip
+
+# berkas sistem
+.DS_Store
+Thumbs.db
+*.log

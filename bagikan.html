@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#14503f">
+<link rel="icon" href="./ikon/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="./ikon/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mushaf">
+<meta name="description" content="Bagikan Mushaf Al-Qubba dan bawa salinan luring ke HP lain.">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("./sw.js").catch(function(){});});}</script>
+<title>Bagikan Mushaf &middot; Mushaf Al-Qubba</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; background:#f3efe6; color:#23201a; font-family:"Segoe UI",Tahoma,Arial,sans-serif; }
+  .wadah { max-width:560px; margin:0 auto; min-height:100vh; display:flex; flex-direction:column; }
+  header { background:#14503f; color:#fff; padding:calc(14px + env(safe-area-inset-top)) 16px 14px; position:sticky; top:0; z-index:5; display:flex; align-items:center; gap:12px; }
+  header a { color:#fff; text-decoration:none; font-size:20px; line-height:1; opacity:.9; }
+  header h1 { margin:0; font-size:16.5px; }
+  header p { margin:2px 0 0; font-size:11.5px; opacity:.85; }
+  main { flex:1 1 auto; padding:14px; }
+  .kartu { background:#fff; border:1px solid #e0d9c9; border-radius:14px; padding:15px; margin:0 0 12px; }
+  .kartu h2 { margin:0 0 4px; font-size:14.5px; color:#14503f; }
+  .kartu .ket { margin:0 0 12px; font-size:12.5px; line-height:1.55; color:#6b6152; }
+  .tombol { display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%;
+    padding:13px 16px; font:inherit; font-size:14px; font-weight:700; color:#fff; background:#14503f;
+    border:0; border-radius:11px; cursor:pointer; }
+  .tombol.garis { background:#fff; color:#14503f; border:1px solid #14503f; }
+  .tombol:disabled { opacity:.55; cursor:default; }
+  .baris { display:flex; gap:9px; margin-top:9px; }
+  .baris .tombol { flex:1 1 0; }
+  .qr { display:grid; place-items:center; margin:14px 0 4px; }
+  .qr canvas, .qr img { border-radius:10px; background:#fff; padding:8px; border:1px solid #e0d9c9; }
+  .bar { height:10px; background:#ece6d8; border-radius:6px; overflow:hidden; margin:10px 0 6px; }
+  .bar i { display:block; height:100%; width:0; background:linear-gradient(90deg,#2BB741,#128C7E); transition:width .25s ease; }
+  .angka { font-size:12px; color:#6b6152; display:flex; justify-content:space-between; gap:10px; }
+  .status { margin:8px 0 0; font-size:12.5px; color:#14503f; font-weight:600; min-height:18px; }
+  .status.merah { color:#a3341f; }
+  .catatan { margin:0; padding:12px 14px; background:#fff; border:1px solid #e0d9c9; border-radius:12px;
+    font-size:12px; line-height:1.6; color:#6b6152; }
+  .catatan b { color:#23201a; }
+  .catatan ol { margin:6px 0 0; padding-left:18px; }
+  .catatan li { margin:3px 0; }
+  .tautan { word-break:break-all; font-size:12px; color:#1f6b53; }
+  footer { padding:14px; text-align:center; font-size:11.5px; color:#6b6152; }
+  @media (display-mode: standalone) { .ios-saja { display:none; } }
+</style>
+</head>
+<body>
+<div class="wadah">
+  <header>
+    <a href="daftar-halaman.html" aria-label="Kembali">&larr;</a>
+    <div><h1>Bagikan mushaf</h1><p>Bawa Mushaf Al-Qubba ke HP lain &amp; baca tanpa internet</p></div>
+  </header>
+  <main>
+
+    <section class="kartu">
+      <h2>1. Kirim tautan ke HP lain</h2>
+      <p class="ket">Penerima cukup membuka tautan ini di HP-nya, lalu memakai tombol nomor 2 di bawah supaya seluruh 604 halaman tersimpan dan bisa dibaca tanpa internet.</p>
+      <button class="tombol" type="button" id="tombolBagikan">Bagikan tautan</button>
+      <div class="baris">
+        <button class="tombol garis" type="button" id="tombolSalin">Salin tautan</button>
+        <button class="tombol garis" type="button" id="tombolQr">Tampilkan QR</button>
+      </div>
+      <div class="qr" id="kotakQr" hidden><div id="gambarQr"></div></div>
+      <p class="tautan" id="teksTautan" style="margin:10px 0 0"></p>
+    </section>
+
+    <section class="kartu">
+      <h2>2. Unduh semua halaman (mode luring)</h2>
+      <p class="ket">Menyimpan 604 halaman mushaf ke HP ini (kurang lebih 100 MB). Setelah selesai, aplikasi berjalan penuh tanpa internet — termasuk bila dipasang di layar utama.</p>
+      <button class="tombol" type="button" id="tombolUnduh">Unduh semua halaman</button>
+      <div class="bar"><i id="isiBar"></i></div>
+      <div class="angka"><span id="teksSelesai">0 dari 0 halaman</span><span id="teksPenyimpanan"></span></div>
+      <p class="status" id="statusUnduh"></p>
+      <button class="tombol garis" type="button" id="tombolHapus" hidden>Hapus unduhan</button>
+    </section>
+
+    <section class="kartu">
+      <h2>3. Pasang di layar utama</h2>
+      <p class="ket">Setelah dipasang, aplikasi punya ikon sendiri dan terbuka tanpa address bar — seperti aplikasi biasa.</p>
+      <button class="tombol" type="button" id="tombolPasang">Pasang di layar utama</button>
+      <div class="ios-saja">
+        <p class="ket" style="margin:10px 0 0">Di iPhone/iPad (Safari): ketuk tombol <b>Bagikan</b> di bawah layar, lalu pilih <b>Tambahkan ke Layar Utama</b>.</p>
+      </div>
+    </section>
+
+    <section class="kartu">
+      <h2>4. Aplikasi Android (APK)</h2>
+      <p class="ket">Pasang langsung di Android tanpa Play Store. Ukuran ±20 MB, seluruh 604 halaman sudah di dalam aplikasi sehingga langsung bisa dibaca tanpa internet.</p>
+      <a class="tombol" href="unduh/Mushaf-Al-Qubba-1.0.1.apk" download>Unduh APK 1.0.1 (20 MB)</a>
+      <p class="ket" style="margin:10px 0 0">Setelah terunduh, buka berkasnya lalu izinkan &ldquo;instal dari sumber tidak dikenal&rdquo; bila diminta. Aplikasi tidak meminta akun dan tidak mengumpulkan data pribadi &mdash; <a href="privasi.html">kebijakan privasi</a>.</p>
+    </section>
+
+    <section class="kartu">
+      <h2>5. iPhone / iPad</h2>
+      <p class="ket">Di Safari: ketuk <b>Bagikan</b> &rarr; <b>Tambahkan ke Layar Utama</b>. Setelah dipasang, tekan tombol nomor 2 di atas agar seluruh halaman tersimpan untuk dibaca luring.</p>
+      <a class="tombol garis" href="pasang-ios.html">Panduan lengkap iOS</a>
+    </section>
+
+    <section class="catatan">
+      <b>Cara membagikan ke orang lain</b>
+      <ol>
+        <li>Kirim tautan lewat WhatsApp, Telegram, atau QR di atas.</li>
+        <li>Penerima membuka tautan, menekan <b>Unduh semua halaman</b>, lalu <b>Pasang di layar utama</b>.</li>
+        <li>Setelah itu mushaf bisa dibaca tanpa internet, kapan saja.</li>
+      </ol>
+      <p style="margin:8px 0 0">Tautan aplikasi: <span class="tautan" id="tautanAplikasi"></span></p>
+    </section>
+
+  </main>
+  <footer>Mushaf Al-Qubba &middot; 30 juz &middot; 604 halaman</footer>
+</div>
+
+<script src="./qrcode.min.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var tautan = new URL("./daftar-halaman.html", location.href).href;
+  var elTautan = document.getElementById("teksTautan");
+  var elTautanApp = document.getElementById("tautanAplikasi");
+  if (elTautan) { elTautan.textContent = tautan; }
+  if (elTautanApp) { elTautanApp.textContent = tautan; }
+
+  var sw = null;
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.ready.then(function (reg) { sw = reg.active || reg.waiting || reg.installing; periksaStatus(); });
+  }
+
+  /* ---------- berbagi ---------- */
+  var tombolBagikan = document.getElementById("tombolBagikan");
+  if (tombolBagikan) {
+    tombolBagikan.addEventListener("click", function () {
+      var data = {
+        title: "Mushaf Al-Qubba",
+        text: "Mushaf Al-Qur'an 30 juz, 604 halaman. Bisa dibaca tanpa internet.",
+        url: tautan
+      };
+      if (navigator.share) {
+        navigator.share(data).catch(function () {});
+      } else {
+        salin();
+      }
+    });
+  }
+
+  function salin() {
+    var pesan = document.getElementById("statusUnduh");
+    var isi = tautan;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(isi).then(function () {
+        if (pesan) { pesan.className = "status"; pesan.textContent = "Tautan disalin. Kirim ke HP tujuan."; }
+      }).catch(function () { cadanganSalin(isi); });
+    } else {
+      cadanganSalin(isi);
+    }
+  }
+  function cadanganSalin(isi) {
+    var ta = document.createElement("textarea");
+    ta.value = isi; document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); } catch (e) {}
+    document.body.removeChild(ta);
+    var pesan = document.getElementById("statusUnduh");
+    if (pesan) { pesan.className = "status"; pesan.textContent = "Tautan disalin."; }
+  }
+  var tombolSalin = document.getElementById("tombolSalin");
+  if (tombolSalin) { tombolSalin.addEventListener("click", salin); }
+
+  /* ---------- QR ---------- */
+  var tombolQr = document.getElementById("tombolQr");
+  var kotakQr = document.getElementById("kotakQr");
+  var sudahQr = false;
+  if (tombolQr) {
+    tombolQr.addEventListener("click", function () {
+      if (!kotakQr) { return; }
+      if (kotakQr.hidden && !sudahQr && window.QRCode) {
+        new QRCode(document.getElementById("gambarQr"), {
+          text: tautan, width: 190, height: 190, correctLevel: QRCode.CorrectLevel.M
+        });
+        sudahQr = true;
+      }
+      kotakQr.hidden = !kotakQr.hidden;
+    });
+  }
+
+  /* ---------- unduh semua ---------- */
+  var isiBar = document.getElementById("isiBar");
+  var teksSelesai = document.getElementById("teksSelesai");
+  var statusUnduh = document.getElementById("statusUnduh");
+  var tombolUnduh = document.getElementById("tombolUnduh");
+  var tombolHapus = document.getElementById("tombolHapus");
+  var sedangUnduh = false;
+  var totalHalaman = 0;
+
+  function tulisStatus(teks, merah) {
+    if (!statusUnduh) { return; }
+    statusUnduh.className = merah ? "status merah" : "status";
+    statusUnduh.textContent = teks || "";
+  }
+
+  function gambarBar(selesai, total) {
+    var persen = total > 0 ? Math.min(100, Math.round(selesai / total * 100)) : 0;
+    if (isiBar) { isiBar.style.width = persen + "%"; }
+    if (teksSelesai) { teksSelesai.textContent = selesai + " dari " + total + " halaman"; }
+  }
+
+  function periksaStatus() {
+    if (!sw || !navigator.serviceWorker.controller) {
+      navigator.serviceWorker.getRegistration().then(function (reg) {
+        var aktif = reg && (reg.active || reg.waiting || reg.installing);
+        if (aktif) { aktif.postMessage({ tipe: "STATUS_UNDUH" }); }
+      });
+      return;
+    }
+    sw.postMessage({ tipe: "STATUS_UNDUH" });
+    perbaruiPenyimpanan();
+  }
+
+  function perbaruiPenyimpanan() {
+    if (!navigator.storage || !navigator.storage.estimate) { return; }
+    navigator.storage.estimate().then(function (info) {
+      var mb = (info.usage || 0) / 1048576;
+      var el = document.getElementById("teksPenyimpanan");
+      if (el) { el.textContent = "Terpakai " + mb.toFixed(1) + " MB"; }
+    }).catch(function () {});
+  }
+
+  function kirimKeSw(data) {
+    if (navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage(data);
+      return true;
+    }
+    navigator.serviceWorker.ready.then(function (reg) {
+      var aktif = reg.active || reg.waiting || reg.installing;
+      if (aktif) { aktif.postMessage(data); }
+    });
+    return false;
+  }
+
+  if (tombolUnduh) {
+    tombolUnduh.addEventListener("click", function () {
+      if (sedangUnduh) { return; }
+      sedangUnduh = true;
+      tombolUnduh.disabled = true;
+      tombolUnduh.textContent = "Mengunduh…";
+      tulisStatus("Menyiapkan unduhan…");
+      kirimKeSw({ tipe: "UNDUH_SEMUA" });
+    });
+  }
+
+  if (tombolHapus) {
+    tombolHapus.addEventListener("click", function () {
+      if (!confirm("Hapus salinan luring dari HP ini?")) { return; }
+      tombolHapus.disabled = true;
+      kirimKeSw({ tipe: "HAPUS_UNDUHAN" });
+    });
+  }
+
+  navigator.serviceWorker && navigator.serviceWorker.addEventListener("message", function (ev) {
+    var d = ev.data || {};
+    if (d.tipe === "KEMAJUAN") {
+      gambarBar(d.selesai, d.total);
+      tulisStatus("Mengunduh " + d.selesai + " dari " + d.total + " berkas…");
+    } else if (d.tipe === "UNDUH_SELESAI") {
+      sedangUnduh = false;
+      gambarBar(d.selesai, d.total);
+      perbaruiPenyimpanan();
+      if (tombolUnduh) {
+        tombolUnduh.disabled = false;
+        tombolUnduh.textContent = "Perbarui unduhan";
+      }
+      if (tombolHapus) { tombolHapus.hidden = false; }
+      if (d.gagal > 0) {
+        tulisStatus("Selesai, tetapi " + d.gagal + " berkas gagal diunduh. Coba lagi saat jaringan stabil.", true);
+      } else {
+        tulisStatus("Selesai. Mushaf siap dibaca tanpa internet.");
+      }
+    } else if (d.tipe === "UNDUH_GAGAL") {
+      sedangUnduh = false;
+      if (tombolUnduh) { tombolUnduh.disabled = false; tombolUnduh.textContent = "Coba lagi"; }
+      tulisStatus(d.pesan || "Unduhan gagal. Periksa koneksi lalu coba lagi.", true);
+    } else if (d.tipe === "STATUS") {
+      totalHalaman = d.total || 0;
+      gambarBar(d.selesai || 0, totalHalaman);
+      if (totalHalaman && d.selesai >= totalHalaman) {
+        tulisStatus("Semua halaman sudah tersimpan — siap luring.");
+        if (tombolUnduh) { tombolUnduh.textContent = "Perbarui unduhan"; }
+        if (tombolHapus) { tombolHapus.hidden = false; }
+      } else if (d.selesai > 0) {
+        tulisStatus("Sebagian halaman sudah tersimpan. Lanjutkan agar bisa dibaca tanpa internet.");
+        if (tombolHapus) { tombolHapus.hidden = false; }
+      }
+      perbaruiPenyimpanan();
+    } else if (d.tipe === "UNDUHAN_DIHAPUS") {
+      gambarBar(0, totalHalaman);
+      tulisStatus("Salinan luring dihapus.");
+      if (tombolHapus) { tombolHapus.hidden = true; tombolHapus.disabled = false; }
+      if (tombolUnduh) { tombolUnduh.disabled = false; tombolUnduh.textContent = "Unduh semua halaman"; }
+      perbaruiPenyimpanan();
+    }
+  });
+
+  /* ---------- pasang di layar utama ---------- */
+  var tungguPasang = null;
+  var tombolPasang = document.getElementById("tombolPasang");
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault();
+    tungguPasang = e;
+  });
+  if (tombolPasang) {
+    tombolPasang.addEventListener("click", function () {
+      if (tungguPasang) {
+        tungguPasang.prompt();
+        tungguPasang.userChoice.then(function () { tungguPasang = null; });
+      } else {
+        tulisStatus("Bila tombol pasang tidak muncul, gunakan menu browser → “Tambahkan ke layar utama”.");
+      }
+    });
+  }
+
+  if (navigator.storage && navigator.storage.persist) { navigator.storage.persist().catch(function () {}); }
+})();
+</script>
+</body>
+</html>
+

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14503f">
+<link rel="apple-touch-icon" href="./ikon/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mushaf">
+<title>Pasang di iPhone/iPad &middot; Mushaf Al-Qubba</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f3efe6;color:#23201a;font-family:"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.65}
+  .wadah{max-width:640px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+  header{background:#14503f;color:#fff;padding:calc(14px + env(safe-area-inset-top)) 16px 14px;display:flex;align-items:center;gap:12px}
+  header a{color:#fff;text-decoration:none;font-size:20px}
+  header h1{margin:0;font-size:16.5px}
+  header p{margin:2px 0 0;font-size:11.5px;opacity:.85}
+  main{flex:1 1 auto;padding:14px}
+  .kartu{background:#fff;border:1px solid #e0d9c9;border-radius:14px;padding:15px;margin:0 0 12px}
+  .kartu h2{margin:0 0 6px;font-size:14.5px;color:#14503f}
+  .kartu p,.kartu li{font-size:13px;line-height:1.6;color:#4a4438}
+  .kartu .ket{color:#6b6152;font-size:12.5px}
+  .tombol{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px 16px;font:inherit;font-size:14px;font-weight:700;color:#fff;background:#14503f;border:0;border-radius:11px;text-decoration:none}
+  .tombol.garis{background:#fff;color:#14503f;border:1px solid #14503f}
+  .catatan{margin:0;padding:12px 14px;background:#fff;border:1px solid #e0d9c9;border-radius:12px;font-size:12px;line-height:1.6;color:#6b6152}
+  code{background:#ece6d8;padding:1px 6px;border-radius:5px;font-size:12px}
+  ol{padding-left:20px;margin:6px 0 0}
+  footer{padding:14px;text-align:center;font-size:11.5px;color:#6b6152}
+</style>
+</head>
+<body>
+<div class="wadah">
+  <header>
+    <a href="bagikan.html" aria-label="Kembali">&larr;</a>
+    <div><h1>Pasang di iPhone / iPad</h1><p>Dua cara: cepat lewat Safari, atau aplikasi native</p></div>
+  </header>
+  <main>
+
+    <section class="kartu">
+      <h2>Cara 1 &mdash; Pasang dari Safari (tanpa Mac)</h2>
+      <p class="ket">Bisa dilakukan sekarang, tanpa akun Apple Developer.</p>
+      <ol>
+        <li>Buka <b>https://mushaf.103-253-213-113.sslip.io/daftar-halaman.html</b> di <b>Safari</b>.</li>
+        <li>Ketuk tombol <b>Bagikan</b> (kotak dengan panah ke atas).</li>
+        <li>Pilih <b>Tambahkan ke Layar Utama</b>, lalu <b>Tambah</b>.</li>
+        <li>Supaya bisa dibaca tanpa internet: buka aplikasi Mushaf &rarr; <b>Bagikan</b> &rarr; tekan <b>Unduh semua halaman</b> sampai selesai.</li>
+      </ol>
+      <p class="ket">Setelah itu ikon Mushaf muncul di layar utama, terbuka layar penuh, dan seluruh 604 halaman bisa dibaca luring.</p>
+      <a class="tombol" href="bagikan.html">Buka halaman unduh luring</a>
+    </section>
+
+    <section class="kartu">
+      <h2>Cara 2 &mdash; Aplikasi native (.ipa)</h2>
+      <p class="ket">Perlu komputer <b>macOS</b> + <b>Xcode</b> + akun <b>Apple Developer</b> (US$99/tahun untuk memasang di perangkat orang lain atau App Store). Build .ipa <b>tidak bisa</b> dibuat dari server Linux.</p>
+      <p>Proyek Xcode-nya sudah saya siapkan (Capacitor, seluruh isi mushaf 102 MB dibundel):</p>
+      <a class="tombol garis" href="unduh/ios-project-mushaf.zip" download>Unduh proyek iOS (32 MB)</a>
+      <p class="ket" style="margin-top:10px">Langkah di Mac:</p>
+      <ol>
+        <li>Unduh &amp; ekstrak <code>ios-project-mushaf.zip</code>.</li>
+        <li>Buka Terminal: <code>npm install</code> lalu <code>npx cap sync ios</code>.</li>
+        <li><code>cd ios/App &amp;&amp; pod install</code> (CocoaPods).</li>
+        <li>Buka <code>ios/App/App.xcworkspace</code> di Xcode.</li>
+        <li>Pilih target <b>App</b> &rarr; tab <b>Signing &amp; Capabilities</b> &rarr; pilih Team (akun Apple Anda).</li>
+        <li>Untuk memasang di iPhone sendiri: sambungkan iPhone, pilih perangkat, tekan <b>Run</b>.</li>
+        <li>Untuk App Store: <b>Product &rarr; Archive</b> &rarr; Distribute App &rarr; App Store Connect.</li>
+      </ol>
+      <p class="ket">Bundle ID: <code>id.kolegaweb.mushaf</code> &middot; Nama tampilan: <b>Mushaf Al-Qubba</b> &middot; Versi 1.0.0</p>
+    </section>
+
+    <section class="catatan">
+      <b>Kenapa tidak ada berkas .ipa yang bisa langsung diunduh?</b>
+      <p style="margin:6px 0 0">Apple hanya mengizinkan aplikasi iOS ditandatangani dan dikemas memakai Xcode di macOS (dan untuk dipasang di perangkat lain harus lewat App Store atau TestFlight). Server ini Linux, jadi yang bisa saya siapkan adalah proyek Xcode siap-archive seperti di atas.</p>
+    </section>
+
+  </main>
+  <footer>Mushaf Al-Qubba &middot; 30 juz &middot; 604 halaman</footer>
+</div>
+</body>
+</html>

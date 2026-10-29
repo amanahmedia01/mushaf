@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-startup-image" href="splash/splash-1290x2796.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3)">
+<link rel="apple-touch-startup-image" href="splash/splash-1284x2778.png" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3)">
+<link rel="apple-touch-startup-image" href="splash/splash-1242x2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)">
+<link rel="apple-touch-startup-image" href="splash/splash-828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)">
+<link rel="apple-touch-startup-image" href="splash/splash-1179x2556.png" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3)">
+<link rel="apple-touch-startup-image" href="splash/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)">
+<link rel="apple-touch-startup-image" href="splash/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)">
+<link rel="apple-touch-startup-image" href="splash/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
+<link rel="apple-touch-startup-image" href="splash/splash-1242x2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)">
+<meta name="theme-color" content="#14503f">
+<link rel="icon" href="./ikon/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="./ikon/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mushaf">
+<meta name="description" content="Mushaf Al-Qur'an 30 juz, 604 halaman, dengan warna tajwid.">
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("./sw.js").catch(function(){});});}</script>
+<title>Mushaf Al-Qubba &middot; 30 Juz</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; background:#f3efe6; color:#23201a; font-family: "Segoe UI", Tahoma, Arial, sans-serif; }
+  .wadah { max-width: 560px; margin: 0 auto; min-height: 100vh; display:flex; flex-direction:column; }
+  header { background:#14503f; color:#fff; padding:calc(15px + env(safe-area-inset-top)) 16px 15px; position:sticky; top:0; z-index:5;
+    display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .tombol-bagikan { flex:0 0 auto; display:inline-flex; align-items:center; gap:6px; padding:9px 14px;
+    font-size:12.5px; font-weight:700; color:#fff; text-decoration:none; border-radius:10px;
+    background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.28); }
+  .tbl-luring { margin:0 0 14px; padding:13px 14px; background:linear-gradient(135deg,#14503f,#1f6b53);
+    border-radius:12px; color:#fff; display:flex; align-items:center; gap:12px; }
+  .tbl-luring div { flex:1 1 auto; font-size:12.5px; line-height:1.5; }
+  .tbl-luring b { display:block; font-size:13.5px; margin-bottom:2px; }
+  .tbl-luring a.tautan-cari { background:#e6f0eb; color:#14503f; border:1px solid rgba(255,255,255,.35); }
+  .tbl-luring a { flex:0 0 auto; padding:10px 16px; font-size:13px; font-weight:700; color:#14503f;
+    background:#fff; border-radius:10px; text-decoration:none; }
+  header h1 { margin:0; font-size:17px; }
+  header p { margin:3px 0 0; font-size:12px; opacity:.85; }
+  main { flex:1 1 auto; padding:14px; }
+  .tbl-pasang { margin:0 0 14px; padding:12px 14px; background:#fff; border:1px solid #e0d9c9;
+    border-radius:12px; display:flex; align-items:center; gap:12px; }
+  .tbl-pasang div { flex:1 1 auto; font-size:12.5px; line-height:1.5; color:#6b6152; }
+  .tbl-pasang button { flex:0 0 auto; padding:10px 18px; font:inherit; font-size:13.5px; font-weight:700;
+    color:#fff; background:#14503f; border:0; border-radius:10px; cursor:pointer; }
+  .kisi { display:grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap:10px; }
+  .kartu { display:flex; align-items:center; gap:11px; background:#fff; border:1px solid #e0d9c9;
+    border-radius:12px; padding:11px; text-decoration:none; color:#23201a; box-shadow:0 1px 6px rgba(60,45,20,.07); }
+  .kartu:active { background:#e9f3ee; }
+  .kartu .nomor { display:grid; place-items:center; width:34px; height:34px; flex:0 0 auto;
+    border-radius:10px; background:#e6f0eb; color:#14503f; font-weight:700; font-size:14px; }
+  .kartu .ket { font-size:13.5px; font-weight:600; line-height:1.3; }
+  .kartu .ket small { display:block; font-weight:400; font-size:11px; color:#6b6152; }
+  .catatan { margin:16px 0 0; padding:13px; background:#fff; border:1px solid #e0d9c9; border-radius:12px;
+    font-size:12.5px; line-height:1.55; color:#6b6152; }
+  .catatan a { color:#1f6b53; }
+  .donasi-bawah { margin:16px 0 0; text-align:center; }
+  .splash { position:fixed; inset:0; z-index:100; background:#0F1B48;
+    display:grid; place-items:center; transition:opacity .5s ease; }
+  .splash img { width:78%; max-width:470px; height:auto; display:block;
+    -webkit-mask-image:radial-gradient(closest-side,#000 84%,rgba(0,0,0,0) 100%);
+    mask-image:radial-gradient(closest-side,#000 84%,rgba(0,0,0,0) 100%); }
+  .splash.hilang { opacity:0; pointer-events:none; }
+  .donasi-bawah a { display:inline-flex; align-items:center; gap:9px; padding:14px 24px;
+    font-size:14.5px; font-weight:700; color:#fff; text-decoration:none; border-radius:12px;
+    background:linear-gradient(135deg,#2BB741,#128C7E); box-shadow:0 3px 12px rgba(0,0,0,.18); }
+  .keterangan-donasi { margin:10px auto 0; max-width:560px; font-size:11.5px;
+    line-height:1.5; color:#6b6152; }
+  footer { padding:14px; text-align:center; font-size:11.5px; color:#6b6152; }
+  @media (display-mode: standalone) { .tbl-pasang { display:none; } }
+</style>
+</head>
+<body>
+<div class="splash" id="splash"><img src="img/kover-bersih.jpg" alt="Mushaf Al-Qubba"></div>
+<div class="wadah">
+  <header><div><h1>Mushaf Al-Qubba &middot; 30 Juz</h1>
+  <p>604 halaman &middot; halaman 1 sampai 604</p></div>
+  <a class="tombol-bagikan" href="bagikan.html">Bagikan</a></header>
+  <main>
+    <div class="tbl-pasang" id="tblPasang" hidden>
+      <div>Pasang aplikasi ini di layar utama HP supaya bisa dibuka seperti aplikasi biasa.</div>
+      <button type="button" id="tombolPasang">Pasang</button>
+    </div>
+    <div class="tbl-luring">
+      <div><b>Baca tanpa internet</b>Unduh seluruh mushaf ke HP ini, atau bagikan ke HP lain lewat tautan/QR.</div>
+      <a href="bagikan.html">Bagikan</a>
+      <a class="tautan-cari" href="https://cari.103-253-213-113.sslip.io/" target="_blank" rel="noopener">Cari ayat</a>
+      <a class="tautan-cari" href="unduh/Mushaf-Al-Qubba-1.0.1.apk" download>APK</a>
+    </div>
+    <div class="kisi">
+      <a class="kartu" href="juz1/index.html"><span class="nomor">1</span><span class="ket">Juz 1<small>hal. 1–21 &middot; 21 halaman</small></span></a>
+      <a class="kartu" href="juz2/index.html"><span class="nomor">2</span><span class="ket">Juz 2<small>hal. 22–41 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz3/index.html"><span class="nomor">3</span><span class="ket">Juz 3<small>hal. 42–61 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz4/index.html"><span class="nomor">4</span><span class="ket">Juz 4<small>hal. 62–81 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz5/index.html"><span class="nomor">5</span><span class="ket">Juz 5<small>hal. 82–101 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz6/index.html"><span class="nomor">6</span><span class="ket">Juz 6<small>hal. 102–121 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz7/index.html"><span class="nomor">7</span><span class="ket">Juz 7<small>hal. 122–141 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz8/index.html"><span class="nomor">8</span><span class="ket">Juz 8<small>hal. 142–161 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz9/index.html"><span class="nomor">9</span><span class="ket">Juz 9<small>hal. 162–181 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz10/index.html"><span class="nomor">10</span><span class="ket">Juz 10<small>hal. 182–201 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz11/index.html"><span class="nomor">11</span><span class="ket">Juz 11<small>hal. 202–221 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz12/index.html"><span class="nomor">12</span><span class="ket">Juz 12<small>hal. 222–241 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz13/index.html"><span class="nomor">13</span><span class="ket">Juz 13<small>hal. 242–261 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz14/index.html"><span class="nomor">14</span><span class="ket">Juz 14<small>hal. 262–281 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz15/index.html"><span class="nomor">15</span><span class="ket">Juz 15<small>hal. 282–301 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz16/index.html"><span class="nomor">16</span><span class="ket">Juz 16<small>hal. 302–321 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz17/index.html"><span class="nomor">17</span><span class="ket">Juz 17<small>hal. 322–341 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz18/index.html"><span class="nomor">18</span><span class="ket">Juz 18<small>hal. 342–361 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz19/index.html"><span class="nomor">19</span><span class="ket">Juz 19<small>hal. 362–381 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz20/index.html"><span class="nomor">20</span><span class="ket">Juz 20<small>hal. 382–401 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz21/index.html"><span class="nomor">21</span><span class="ket">Juz 21<small>hal. 402–421 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz22/index.html"><span class="nomor">22</span><span class="ket">Juz 22<small>hal. 422–441 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz23/index.html"><span class="nomor">23</span><span class="ket">Juz 23<small>hal. 442–461 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz24/index.html"><span class="nomor">24</span><span class="ket">Juz 24<small>hal. 462–481 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz25/index.html"><span class="nomor">25</span><span class="ket">Juz 25<small>hal. 482–501 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz26/index.html"><span class="nomor">26</span><span class="ket">Juz 26<small>hal. 502–521 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz27/index.html"><span class="nomor">27</span><span class="ket">Juz 27<small>hal. 522–541 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz28/index.html"><span class="nomor">28</span><span class="ket">Juz 28<small>hal. 542–561 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz29/index.html"><span class="nomor">29</span><span class="ket">Juz 29<small>hal. 562–581 &middot; 20 halaman</small></span></a>
+      <a class="kartu" href="juz30/index.html"><span class="nomor">30</span><span class="ket">Juz 30<small>hal. 582–604 &middot; 23 halaman</small></span></a>
+    </div>
+    <div class="catatan">
+      Setiap halaman mengisi penuh layar. Tombol menu di pojok kanan atas berisi navigasi halaman,
+      tombol zoom masuk dan keluar, serta tombol kembali ke tampilan isi penuh.
+      Halaman yang sudah dibuka bisa dibaca lagi tanpa internet.
+      Daftar juz versi lama ada di <a href="juz.html">juz.html</a>.
+    </div>
+    <div class="donasi-bawah">
+      <a href="https://bit.ly/donasiqubba" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:19px;height:19px"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>Donasi / Wakaf</a>
+      <p class="keterangan-donasi">Jumlah donasi/wakaf dapat disesuaikan sampai Rp 20.000</p>
+    </div>
+  </main>
+  <footer>Dipecah dari berkas juz1.html sampai juz30.html</footer>
+</div>
+<script>
+var tungguPasang = null;
+window.addEventListener("beforeinstallprompt", function (e) {
+  e.preventDefault();
+  tungguPasang = e;
+  var k = document.getElementById("tblPasang");
+  if (k) { k.hidden = false; }
+});
+function sembunyiPasang() {
+  var k = document.getElementById("tblPasang");
+  if (k) { k.hidden = true; }
+}
+var t = document.getElementById("tombolPasang");
+if (t) { t.addEventListener("click", function () {
+  if (!tungguPasang) { return; }
+  tungguPasang.prompt();
+  tungguPasang.userChoice.then(function () { tungguPasang = null; sembunyiPasang(); });
+}); }
+if (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) { sembunyiPasang(); }
+  var sp = document.getElementById('splash');
+  if (sp) {
+    var sudah = false;
+    try { sudah = sessionStorage.getItem('splashTampil') === '1'; } catch (e) {}
+    if (sudah) {
+      if (sp.parentNode) { sp.parentNode.removeChild(sp); }
+    } else {
+      try { sessionStorage.setItem('splashTampil', '1'); } catch (e) {}
+      setTimeout(function () {
+        sp.classList.add('hilang');
+        setTimeout(function () { if (sp.parentNode) { sp.parentNode.removeChild(sp); } }, 600);
+      }, 1500);
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "name": "Mushaf Al-Qubba",
+  "short_name": "Mushaf",
+  "description": "Mushaf Al-Qur'an 30 juz, 604 halaman, dengan warna tajwid dan terjemahan per kata.",
+  "lang": "id",
+  "start_url": "./daftar-halaman.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0F1B48",
+  "theme_color": "#0F1B48",
+  "categories": [
+    "education",
+    "books"
+  ],
+  "icons": [
+    {
+      "src": "./ikon/ikon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./ikon/ikon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./ikon/ikon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
